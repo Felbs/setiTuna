@@ -80,6 +80,14 @@ catch a civilization exactly as advanced as 1950s Earth, and no other.
 - **Noise that won't compress** the way real noise does — structure you can't
   hear but a compressor can feel.
 
+## Validated on real RF (REAL_DATA_CHARACTERIZATION.md)
+The suite isn't just selftested — it's characterized on real, known-type rig
+captures: **7/7 digital/engineered signals flagged** (GPS, ADS-B, AIS, FLEX, FT8,
+HD-AM OFDM, CHU) and **pure-noise + pure-carrier controls both correctly silent**.
+`python real_data_char.py`. The HD-AM OFDM capture (WWFD 820) lights cyclo at 3129
+— a live preview of the digital-AM task. The ensemble matters: GPS spread slipped
+past cyclo alone but comb+entropy caught it.
+
 ## The plan: an autonomous novel-detector agent (task #31)
 The right way to explore this isn't one detector — it's a LOOP that (1) proposes
 a detection hypothesis from this list (or a new combination), (2) implements it
