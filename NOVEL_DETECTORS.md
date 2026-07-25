@@ -43,11 +43,14 @@ catch a civilization exactly as advanced as 1950s Earth, and no other.
    *perfectly* zero-drift signal from a fixed sky position (not our building) is
    the fingerprint of intent, not the thing to discard.
 
-4. **INFORMATION / COMPRESSIBILITY** — pure noise is incompressible (max
-   entropy); a pure carrier is trivially compressible (min entropy); a MESSAGE
-   sits in between with structured, scale-dependent complexity. Slide a
-   compression-ratio window over the spectrogram: modulation of ANY kind lights
-   up the middle band. Modulation-agnostic — doesn't assume narrowband.
+4. **INFORMATION / COMPRESSIBILITY** — **BUILT + VALIDATED (entropy.py, EXP-16,
+   ENTROPY_RESULT.md).** Pure noise is incompressible (max entropy); a pure
+   carrier is trivially compressible (min entropy); a MESSAGE sits in between
+   with structured complexity. Spectral flatness (Wiener entropy) scores it:
+   carrier 0.000 < modulated 0.506 < noise 0.998, strict ordering, modulated
+   band correctly flagged STRUCTURED. Modulation-agnostic; complementary to cyclo
+   (entropy = band-limited structure by shape; cyclo = spread structure by hidden
+   periodicity). `python entropy.py selftest`.
 
 5. **POLARIZATION signatures** — most SETI discards polarization. Strong, stable
    CIRCULAR polarization of a specific handedness is rare in nature but standard
