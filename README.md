@@ -6,13 +6,35 @@ sidebands, SNR 245, drift −0.38 Hz/s) in Green Bank open data, then re-finding
 it **by structure alone** with our sideband-pair search.
 
 ## What's here
+- `star_sweep.py` — **point it at a list of nearby stars and walk away.** For
+  each target it queries the BL archive, pulls the data, runs turboSETI's drift
+  search, and applies RFI forensics (a real signal drifts at *varied* rates;
+  interference sits at one). Writes a verdict table. Swept 6 neighbors incl.
+  Barnard's Star and Tau Ceti — all RFI, zero candidates (`SWEEP_RESULTS.md`).
 - `sideband_pairs.py` — the search nobody else runs: post-process turboSETI hit
   lists for **symmetric sideband families sharing a common drift** — the
   signature of a *modulated transmitter* (data!), not just a dead carrier.
   Validated: given three anonymous hits, it autonomously flagged Voyager as
   `TRIPLET ... carrier + data sidebands: a TRANSMITTER`.
-- `IDEAS.md` — the novel-search roadmap (drift curvature, anti-cadence beacons,
-  complexity scans, RFI forensics).
+- `cyclo.py` — **the frontier: a detector for signals turboSETI is blind to.**
+  A drift search only finds loud narrowband *carriers* — radio like 1950s Earth.
+  Anyone slightly ahead of us transmits *spread-spectrum* that looks like pure
+  noise in the spectrum. `cyclo.py` catches it via the cyclic autocorrelation:
+  it detected a spread signal at **−10 dB SNR (invisible to any spectrum search)
+  with zero false alarms** (`CYCLO_RESULT.md`). `python cyclo.py selftest`.
+- `NOVEL_DETECTORS.md` / `IDEAS.md` — why past SETI probably looked for the
+  wrong thing, and the roadmap of detectors nobody runs (cyclostationarity ✅,
+  frequency combs, entropy/compressibility, zero-drift beacons, polarization).
+
+## Quickstart — hunt for aliens yourself
+```bash
+pip install -r requirements.txt          # numpy, scipy, turbo_seti, blimpy
+python cyclo.py selftest                 # prove the novel detector works (no data needed)
+python star_sweep.py GJ699 GJ411 GJ71    # sweep real stars from the BL open archive
+```
+`star_sweep.py` needs `curl` on PATH (ships with Windows 10+/macOS/Linux). The
+BL archive is free and public: <http://seti.berkeley.edu/opendata>. Each target
+pulls ~0.2–0.3 GB into `data/` (gitignored) and deletes it after the hunt.
 
 ## Architecture
 ```mermaid

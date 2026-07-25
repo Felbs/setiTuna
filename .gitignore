@@ -1,2 +1,7 @@
 data/
 deephunt.log
+
+# run artifacts
+*.log
+_dl_url.txt
+__pycache__/

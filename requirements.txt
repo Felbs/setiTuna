@@ -1,0 +1,7 @@
+# setiTuna — hunt for technosignatures in Breakthrough Listen open data
+# cyclo.py (the novel detector) needs only numpy; the BL pipeline needs the rest.
+numpy>=1.21
+scipy>=1.7
+turbo_seti>=2.3.0    # narrowband drift search (Taylor-tree De-Doppler)
+blimpy>=2.0.0        # read/verify BL filterbank + HDF5 data products
+# also required on PATH: curl (star_sweep.py downloads) — ships with Win10+/macOS/Linux
