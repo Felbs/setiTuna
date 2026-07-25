@@ -28,11 +28,14 @@ catch a civilization exactly as advanced as 1950s Earth, and no other.
    This is the class of signal turboSETI is structurally blind to, and it sees
    it. `python cyclo.py selftest` is the regression gate.
 
-2. **FREQUENCY COMBS** — a set of tones at exactly even spacing across a wide
-   band. Nature makes evenly-spaced lines only in narrow, physics-fixed places
-   (rotational molecular lines aren't uniform in Hz). A broad, uniform Hz-spaced
-   comb is an optical-frequency-comb-grade artifact. Search the hit list's
-   spacing histogram for a sharp uniform peak.
+2. **FREQUENCY COMBS** — **BUILT + VALIDATED (comb.py, EXP-15, COMB_RESULT.md).**
+   A set of tones at exactly even spacing across a wide band. Nature makes
+   evenly-spaced lines only in narrow, physics-fixed places (rotational molecular
+   lines aren't uniform in Hz). A broad, uniform Hz-spaced comb is an optical-
+   frequency-comb-grade artifact. Our detector uses the cepstrum to decide
+   (uniformity, not tone-count) and the spectrum autocorrelation to read the
+   spacing: 3/3 combs caught at exact spacing, 0/3 false fires on the same number
+   of RANDOMLY-spaced tones. `python comb.py selftest`.
 
 3. **ZERO-DRIFT / ANTI-DRIFT beacons** — SETI throws OUT zero-drift signals as
    RFI (they must be local, since the sky Doppler-drifts). But a smart beacon
