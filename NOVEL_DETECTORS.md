@@ -18,13 +18,15 @@ catch a civilization exactly as advanced as 1950s Earth, and no other.
 
 ## Detectors nobody runs (ranked by "physics says this could work")
 
-1. **CYCLOSTATIONARITY** — the big one. Every digital signal, even one spread
-   below the noise floor and looking like pure noise in the spectrum, has HIDDEN
-   PERIODICITIES in its second-order statistics (symbol rate, carrier, chip
-   rate). The spectral correlation function / cyclic autocorrelation reveals them
-   where the power spectrum is flat. This is standard in signals intelligence and
-   modem sync; SETI barely uses it. It can detect a spread-spectrum "TV leakage"
-   equivalent that turboSETI is blind to. **Build this first.**
+1. **CYCLOSTATIONARITY** — the big one. **BUILT + VALIDATED (cyclo.py, EXP-14,
+   see CYCLO_RESULT.md).** Every digital signal, even one spread below the noise
+   floor and looking like pure noise in the spectrum, has HIDDEN PERIODICITIES in
+   its second-order statistics (symbol rate, carrier, chip rate). The cyclic
+   autocorrelation reveals them where the power spectrum is flat. Our detector
+   catches direct-sequence spread BPSK at −6 and −10 dB SNR — invisible to a
+   narrowband search — with zero false alarms on pure noise (3/3, FA-gated).
+   This is the class of signal turboSETI is structurally blind to, and it sees
+   it. `python cyclo.py selftest` is the regression gate.
 
 2. **FREQUENCY COMBS** — a set of tones at exactly even spacing across a wide
    band. Nature makes evenly-spaced lines only in narrow, physics-fixed places
