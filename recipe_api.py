@@ -197,6 +197,12 @@ def spectral_flatness(p):
 # veto here is a HINT with a reason attached, never a silent delete.
 RFI_BANDS = [
     (1025.0, 1150.0, "aeronautical DME / TACAN"),
+    # Added 2026-07-30: the GJ699 cadence produced a 41-hit cluster in
+    # 1442-1452 MHz and a survivor at 1451.948 MHz that no veto explained. In
+    # the US 1435-1535 MHz is Aeronautical Mobile Telemetry (flight-test
+    # downlinks) — the table simply had a hole there, its nearest entry
+    # starting at 1525. A gap in the RFI table looks exactly like a discovery.
+    (1435.0, 1535.0, "aeronautical mobile telemetry (AMT, US flight test)"),
     (1164.0, 1215.0, "GNSS L5 (GPS/Galileo E5/GLONASS L3)"),
     (1215.0, 1400.0, "air-surveillance + military radar (ARSR-4, ASR-9)"),
     (1087.0, 1093.0, "ADS-B / Mode-S aircraft transponders (1090 MHz)"),
@@ -240,7 +246,67 @@ def natural_reason(f_mhz):
     return None
 
 
-def explain(cands, spec=None, drift_min_hz_s=0.02):
+def round_number_reason(f_mhz, tol_hz=50.0):
+    """Is this frequency suspiciously ROUND in human units?
+
+    Nature does not know what a megahertz is. A hit landing on an exact round
+    value is an oscillator, a clock harmonic or a synthesiser birdie, not the
+    sky. Added 2026-07-30 after a GJ699 panel produced a score-4116 'candidate'
+    at EXACTLY 1500.000000 MHz, which no existing veto caught.
+
+    Checked coarsest-first, because 1500.000000 should be reported as the 100 MHz
+    coincidence it is, not as a 1 MHz one.
+    """
+    f_hz = f_mhz * 1e6
+    for step, label in ((100e6, "100 MHz"), (25e6, "25 MHz"), (10e6, "10 MHz"),
+                        (5e6, "5 MHz"), (1e6, "1 MHz")):
+        if abs(f_hz - round(f_hz / step) * step) <= tol_hz:
+            why = round(f_hz / step) * step / 1e6
+            return (f"exactly on a {label} boundary ({why:g} MHz) - oscillator / "
+                    f"clock harmonic, nature does not pick round numbers")
+    return None
+
+
+def railed_drift_reason(c, tol=1e-6):
+    """Did the drift fit stop at the EDGE of its own search range?
+
+    If |drift| equals the searched maximum, the true drift is >= that value and
+    was never measured - the optimiser simply ran out of grid. Reporting it as a
+    measured drift (and scoring on it) is wrong in a way that looks confident.
+    Needs the recipe to say what range it searched; recipes that record
+    drift_max_hz_s in provenance get this check for free.
+    """
+    dmax = (c.provenance or {}).get("drift_max_hz_s")
+    if dmax and c.drift_hz_s is not None and abs(abs(c.drift_hz_s) - abs(dmax)) <= tol:
+        return (f"drift railed at the search limit ({c.drift_hz_s:+.3f} Hz/s = "
+                f"the +-{abs(dmax):g} boundary) - drift NOT measured, only bounded")
+    return None
+
+
+def coarse_channel_reason(cands, coarse_mhz=2.9296875, tol_frac=0.01, min_group=2):
+    """Flag hits spaced ~one COARSE CHANNEL apart as instrument bandpass shape.
+
+    Breakthrough Listen's GBT products are stitched from ~2.93 MHz coarse
+    channels, and each one carries the same filter roll-off. Structure that
+    repeats at exactly that pitch is the instrument, not the sky. Returns a set
+    of ids to flag. Found on GJ699: two 'unexplained' wide flat bands at
+    1409.209728 and 1412.132263 MHz - 0.998 coarse channels apart.
+    """
+    flagged = set()
+    fs = sorted(((c.freq_mhz, id(c)) for c in cands))
+    for i in range(len(fs)):
+        for j in range(i + 1, len(fs)):
+            d = fs[j][0] - fs[i][0]
+            if d > coarse_mhz * 3:
+                break
+            n = d / coarse_mhz
+            if n >= 0.5 and abs(n - round(n)) <= tol_frac and round(n) >= 1:
+                flagged.add(fs[i][1])
+                flagged.add(fs[j][1])
+    return flagged if len(flagged) >= min_group else set()
+
+
+def explain(cands, spec=None, drift_min_hz_s=0.02, coarse_mhz=2.9296875):
     """Attach a VERDICT to every candidate instead of thresholding it away.
     This is the repo's honesty rail in code form (README 'Honesty rails').
 
@@ -252,24 +318,66 @@ def explain(cands, spec=None, drift_min_hz_s=0.02):
       known-RFI band  : sits in an allocated terrestrial/satellite band.
       natural line    : sits on a real astrophysical line (HI/OH/CH3OH/H2O).
       band edge       : within 3 channels of the block edge - likely an artifact.
+      round number    : on an exact MHz boundary - an oscillator, not the sky.
+      railed drift    : the drift fit hit its own search limit and is unmeasured.
+      coarse-channel  : repeats at the instrument's ~2.93 MHz channel pitch.
       unexplained     : survived everything. These are the ones to work on.
+
+    The last three were added 2026-07-30 because a Barnard's Star panel produced
+    six 'unexplained' hits of which every single one was explicable: an exactly
+    1500.000000 MHz birdie whose drift was pinned to the search boundary, and a
+    pair of wide flat bands one coarse channel apart. Vetoes label, never delete.
     """
+    coarse_flags = coarse_channel_reason(cands, coarse_mhz) if len(cands) > 1 else set()
     for c in cands:
         why = []
         if spec is not None:
             ch = spec.chan_of(c.freq_mhz)
             if ch < 3 or ch > spec.nchan - 4:
                 why.append("band edge (<3 channels from the edge)")
+        rn = round_number_reason(c.freq_mhz)
+        if rn:
+            why.append(rn)
+        rd = railed_drift_reason(c)
+        if rd:
+            why.append(rd)
+        if id(c) in coarse_flags:
+            why.append(f"coarse-channel structure (~{coarse_mhz:.4f} MHz pitch) "
+                       "- instrument bandpass, not sky")
         nat = natural_reason(c.freq_mhz)
         if nat:
             why.append(f"natural line: {nat}")
         r = rfi_reason(c.freq_mhz)
         if r:
             why.append(f"known-RFI band: {r}")
-        if c.drift_hz_s is not None and abs(c.drift_hz_s) < drift_min_hz_s \
-                and "drift" in " ".join(c.provenance.get("measures", [])) + c.label + str(c.kind):
-            why.append(f"zero-drift ({c.drift_hz_s:+.4f} Hz/s) - local unless "
-                       "drift-compensated")
+        # ── DRIFT: measured-and-zero vs never-measured ─────────────────────
+        # These are DIFFERENT claims and the old gate conflated them. It only
+        # fired when the recipe's own text mentioned "drift", so a wide flat
+        # band reported by spread_flatness at exactly 0.000 Hz/s sailed through
+        # as "unexplained" — which is how 1451.948 MHz survived a full ABACAD
+        # cadence on GJ699 and briefly looked like a candidate.
+        #
+        # But simply removing the gate is wrong too: Candidate.drift_hz_s
+        # DEFAULTS to 0.0, so an unconditional test would brand every hit from
+        # every non-drift recipe as "zero-drift" — a veto that fires on
+        # everything explains nothing.
+        #
+        # So: decide whether drift was actually SEARCHED (the recipe published a
+        # search range, or says it measures drift), and label accordingly.
+        prov = c.provenance or {}
+        measured_drift = ("drift_max_hz_s" in prov
+                          or "drift_step_hz_s" in prov
+                          or "drift" in " ".join(prov.get("measures", [])))
+        if c.drift_hz_s is not None and abs(c.drift_hz_s) < drift_min_hz_s:
+            if measured_drift:
+                why.append(f"zero-drift ({c.drift_hz_s:+.4f} Hz/s) - local unless "
+                           "drift-compensated")
+            elif c.kind == "techno":
+                # Not a veto, an honest caveat: a sky source MUST Doppler-drift
+                # (Earth's rotation alone gives ~0.05-0.3 Hz/s at L band), and
+                # this recipe never looked. Claimed as techno, unverifiable as sky.
+                why.append("drift NOT measured by this recipe - a sky source must "
+                           "Doppler-drift, so sky origin is unverified")
         c.verdict = "; ".join(why) if why else "unexplained - worth a human"
     return cands
 

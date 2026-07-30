@@ -16,7 +16,7 @@
     "hi_line"
    ],
    "false_alarms": [],
-   "runtime_s": 0.367,
+   "runtime_s": 0.376,
    "errors": [],
    "n_caught": 3,
    "n_fa": 0,
@@ -45,28 +45,6 @@
    "clean": true
   },
   {
-   "recipe": "comb_uniformity",
-   "version": "1.0",
-   "author": "setiTuna",
-   "caught": [
-    "comb"
-   ],
-   "missed": [
-    "drift_loud",
-    "drift_faint",
-    "spread",
-    "frb_dm560",
-    "pulsar_B0329",
-    "hi_line"
-   ],
-   "false_alarms": [],
-   "runtime_s": 0.003,
-   "errors": [],
-   "n_caught": 1,
-   "n_fa": 0,
-   "clean": true
-  },
-  {
    "recipe": "hi_line_natural",
    "version": "1.0",
    "author": "setiTuna",
@@ -82,7 +60,29 @@
     "pulsar_B0329"
    ],
    "false_alarms": [],
-   "runtime_s": 0.283,
+   "runtime_s": 0.001,
+   "errors": [],
+   "n_caught": 1,
+   "n_fa": 0,
+   "clean": true
+  },
+  {
+   "recipe": "comb_uniformity",
+   "version": "1.0",
+   "author": "setiTuna",
+   "caught": [
+    "comb"
+   ],
+   "missed": [
+    "drift_loud",
+    "drift_faint",
+    "spread",
+    "frb_dm560",
+    "pulsar_B0329",
+    "hi_line"
+   ],
+   "false_alarms": [],
+   "runtime_s": 0.015,
    "errors": [],
    "n_caught": 1,
    "n_fa": 0,
@@ -104,7 +104,29 @@
     "hi_line"
    ],
    "false_alarms": [],
-   "runtime_s": 0.752,
+   "runtime_s": 0.7,
+   "errors": [],
+   "n_caught": 1,
+   "n_fa": 0,
+   "clean": true
+  },
+  {
+   "recipe": "doppler_coherence",
+   "version": "1.0",
+   "author": "Felbs + Claude",
+   "caught": [
+    "comb"
+   ],
+   "missed": [
+    "drift_loud",
+    "drift_faint",
+    "spread",
+    "frb_dm560",
+    "pulsar_B0329",
+    "hi_line"
+   ],
+   "false_alarms": [],
+   "runtime_s": 0.787,
    "errors": [],
    "n_caught": 1,
    "n_fa": 0,
@@ -125,7 +147,7 @@
     "hi_line"
    ],
    "false_alarms": [],
-   "runtime_s": 0.011,
+   "runtime_s": 0.004,
    "errors": [],
    "n_caught": 0,
    "n_fa": 0,

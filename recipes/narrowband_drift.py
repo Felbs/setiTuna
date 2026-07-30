@@ -81,6 +81,9 @@ def run(spec, params=None):
             provenance=dict(method="shift-and-sum de-Doppler",
                             measures=["drift", "robust_z"],
                             n_drift_trials=n, drift_step_hz_s=round(step, 5),
+                            # published so recipe_api.railed_drift_reason() can
+                            # tell "drift measured" from "drift hit the grid edge"
+                            drift_max_hz_s=float(p["max_drift_hz_s"]),
                             zmin=p["zmin"],
                             reference="Taylor 1974 tree de-dispersion; "
                                       "turbo_seti (Enriquez & Price 2019)")))

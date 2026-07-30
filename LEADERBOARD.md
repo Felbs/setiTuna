@@ -14,12 +14,13 @@ misses FRBs. Breadth of the *panel* is the goal, not any one recipe.
 
 | # | recipe | ver | author | caught | false alarms | runtime | scenes caught |
 |---|--------|-----|--------|--------|--------------|---------|---------------|
-| 1 | `narrowband_drift` | 1.0 | setiTuna | 3/7 | 0/2 | 0.37s | drift_loud, drift_faint, comb |
+| 1 | `narrowband_drift` | 1.0 | setiTuna | 3/7 | 0/2 | 0.38s | drift_loud, drift_faint, comb |
 | 2 | `spread_flatness` | 1.0 | setiTuna | 2/7 | 0/2 | 0.01s | spread, hi_line |
-| 3 | `comb_uniformity` | 1.0 | setiTuna | 1/7 | 0/2 | 0.00s | comb |
-| 4 | `hi_line_natural` | 1.0 | setiTuna | 1/7 | 0/2 | 0.28s | hi_line |
-| 5 | `dispersion_sweep` | 1.0 | setiTuna | 1/7 | 0/2 | 0.75s | frb_dm560 |
-| 6 | `pi_ratio` | 1.0 | setiTuna (deliberately playful, genuinely Doppler-invariant) | 0/7 | 0/2 | 0.01s | - |
+| 3 | `hi_line_natural` | 1.0 | setiTuna | 1/7 | 0/2 | 0.00s | hi_line |
+| 4 | `comb_uniformity` | 1.0 | setiTuna | 1/7 | 0/2 | 0.01s | comb |
+| 5 | `dispersion_sweep` | 1.0 | setiTuna | 1/7 | 0/2 | 0.70s | frb_dm560 |
+| 6 | `doppler_coherence` | 1.0 | Felbs + Claude | 1/7 | 0/2 | 0.79s | comb |
+| 7 | `pi_ratio` | 1.0 | setiTuna (deliberately playful, genuinely Doppler-invariant) | 0/7 | 0/2 | 0.00s | - |
 
 Benchmark scenes: drift_loud, drift_faint, comb, spread, frb_dm560, pulsar_B0329, hi_line (+ 2 null scenes).
 
