@@ -14,11 +14,17 @@ misses FRBs. Breadth of the *panel* is the goal, not any one recipe.
 
 | # | recipe | ver | author | caught | false alarms | runtime | scenes caught |
 |---|--------|-----|--------|--------|--------------|---------|---------------|
-| 1 | `narrowband_drift` | 1.0 | setiTuna | 3/7 | 0/2 | 0.39s | drift_loud, drift_faint, comb |
-| 2 | `spread_flatness` | 1.0 | setiTuna | 2/7 | 0/2 | 0.02s | spread, hi_line |
-| 3 | `comb_uniformity` | 1.0 | setiTuna | 1/7 | 0/2 | 0.02s | comb |
-| 4 | `hi_line_natural` | 1.0 | setiTuna | 1/7 | 0/2 | 0.38s | hi_line |
-| 5 | `dispersion_sweep` | 1.0 | setiTuna | 1/7 | 0/2 | 0.69s | frb_dm560 |
-| 6 | `pi_ratio` | 1.0 | setiTuna (deliberately playful, genuinely Doppler-invariant) | 0/7 | 0/2 | 0.00s | - |
+| 1 | `narrowband_drift` | 1.0 | setiTuna | 3/7 | 0/2 | 0.37s | drift_loud, drift_faint, comb |
+| 2 | `spread_flatness` | 1.0 | setiTuna | 2/7 | 0/2 | 0.01s | spread, hi_line |
+| 3 | `comb_uniformity` | 1.0 | setiTuna | 1/7 | 0/2 | 0.00s | comb |
+| 4 | `hi_line_natural` | 1.0 | setiTuna | 1/7 | 0/2 | 0.28s | hi_line |
+| 5 | `dispersion_sweep` | 1.0 | setiTuna | 1/7 | 0/2 | 0.75s | frb_dm560 |
+| 6 | `pi_ratio` | 1.0 | setiTuna (deliberately playful, genuinely Doppler-invariant) | 0/7 | 0/2 | 0.01s | - |
 
 Benchmark scenes: drift_loud, drift_faint, comb, spread, frb_dm560, pulsar_B0329, hi_line (+ 2 null scenes).
+
+## Open bounties
+
+Scenes **no shipped recipe catches yet**. Writing one of these is the single highest-value contribution to this repo — see [RECIPES.md](RECIPES.md).
+
+- **`pulsar_B0329`**

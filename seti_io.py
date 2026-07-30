@@ -483,7 +483,8 @@ def selftest():
     s = synth("drift", drift_hz_s=-0.4, snr=30)
     ok.append(("ascending frequency", s.df_mhz > 0 and s.f_hi > s.f_lo))
     ok.append(("axes length", len(s.freqs_mhz()) == s.nchan and len(s.times_s()) == s.ntime))
-    c = s.crop(f_start=s.f_lo + 0.05, f_stop=s.f_lo + 0.2)
+    span = s.f_hi - s.f_lo
+    c = s.crop(f_start=s.f_lo + 0.25 * span, f_stop=s.f_lo + 0.75 * span)
     ok.append(("crop narrows", c.nchan < s.nchan and c.f_lo >= s.f_lo))
 
     # dedispersion must actually straighten a synthetic FRB

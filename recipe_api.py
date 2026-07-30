@@ -451,6 +451,13 @@ def write_leaderboard(rows, scene_names, path=None):
                      f"{r['n_caught']}/{len(pos)} | {r['n_fa']}/{len(nulls)} | "
                      f"{r['runtime_s']:.2f}s | {', '.join(r['caught']) or '-'} |")
     lines += ["", f"Benchmark scenes: {', '.join(pos)} (+ {len(nulls)} null scenes).", ""]
+    uncaught = [s for s in pos if not any(s in r["caught"] for r in rows)]
+    if uncaught:
+        lines += ["## Open bounties", "",
+                  "Scenes **no shipped recipe catches yet**. Writing one of these is "
+                  "the single highest-value contribution to this repo — see "
+                  "[RECIPES.md](RECIPES.md).", ""]
+        lines += [f"- **`{s}`**" for s in uncaught] + [""]
     err = [(r["recipe"], e) for r in rows for e in r["errors"]]
     if err:
         lines += ["## errors", ""] + [f"- `{n}`: {e}" for n, e in err] + [""]

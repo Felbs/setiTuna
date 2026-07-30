@@ -16,7 +16,7 @@
     "hi_line"
    ],
    "false_alarms": [],
-   "runtime_s": 0.393,
+   "runtime_s": 0.367,
    "errors": [],
    "n_caught": 3,
    "n_fa": 0,
@@ -38,7 +38,7 @@
     "pulsar_B0329"
    ],
    "false_alarms": [],
-   "runtime_s": 0.016,
+   "runtime_s": 0.007,
    "errors": [],
    "n_caught": 2,
    "n_fa": 0,
@@ -60,7 +60,7 @@
     "hi_line"
    ],
    "false_alarms": [],
-   "runtime_s": 0.016,
+   "runtime_s": 0.003,
    "errors": [],
    "n_caught": 1,
    "n_fa": 0,
@@ -82,7 +82,7 @@
     "pulsar_B0329"
    ],
    "false_alarms": [],
-   "runtime_s": 0.377,
+   "runtime_s": 0.283,
    "errors": [],
    "n_caught": 1,
    "n_fa": 0,
@@ -104,7 +104,7 @@
     "hi_line"
    ],
    "false_alarms": [],
-   "runtime_s": 0.693,
+   "runtime_s": 0.752,
    "errors": [],
    "n_caught": 1,
    "n_fa": 0,
@@ -125,7 +125,7 @@
     "hi_line"
    ],
    "false_alarms": [],
-   "runtime_s": 0.0,
+   "runtime_s": 0.011,
    "errors": [],
    "n_caught": 0,
    "n_fa": 0,
