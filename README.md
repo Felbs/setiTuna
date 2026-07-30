@@ -179,6 +179,44 @@ that can read the recipe contract, write a new recipe file, and immediately run
 and score it on the same public data closes the
 hypothesis→experiment→conclusion loop that the rest of this repo does by hand.
 
+### Bring your own LLM — hunt aliens with whatever model you like
+
+MCP is an open protocol, not a vendor hook. **Any MCP-capable client works**, and
+we have no preference: Claude Code or Claude Desktop, other desktop assistants
+that speak MCP, editor extensions, or a **fully local model** you run yourself
+(llama.cpp / Ollama front-ends with MCP support, LM Studio, and similar). The
+server is a plain stdio process — whatever can launch a subprocess and speak MCP
+can drive it. Nothing about setiTuna is tied to a particular provider, and
+`targets_available` is the only tool that can reach the network at all.
+
+Point your client at it by copying `.mcp.json.example` to wherever your client
+keeps its server list (for Claude Code, `.mcp.json` in the project root), then
+edit the interpreter path so it points at a python that has `h5py`/`numpy`:
+
+```jsonc
+{ "mcpServers": { "setituna": {
+    "command": "C:/path/to/python.exe",          // needs h5py + numpy
+    "args": ["C:/path/to/setiTuna/tools/setituna_mcp.py"] } } }
+```
+
+Then just *ask*. Things that work today, in plain language:
+
+- *"What data do I have, and what telescope and band is each file from?"*
+- *"Run every recipe on the Voyager 1 file and show me the candidates."*
+  (Good first move: Voyager's carrier is a known-truth signal — if a search
+  can't find a real spacecraft, it won't find aliens.)
+- *"Is the line in this file the sky or my receiver?"*
+- *"Write a new recipe that looks for `<your idea>`, run it, and put it on the
+  leaderboard."* — this is the interesting one. The model reads
+  `recipe_contract`, writes a file into `recipes/`, and scores it against the
+  same benchmark everyone else's recipe faces, including the hard gate on false
+  alarms in pure noise.
+
+Two honesty rails that apply to models exactly as they apply to people: a
+candidate is not a detection until it survives the **ON/OFF cadence test**, and
+the benchmark will fail a recipe that invents signals in noise. The leaderboard
+has a standing open bounty — nothing catches the test-set pulsar yet.
+
 <details>
 <summary><b>Exactly what it exposes</b> (click to expand)</summary>
 
