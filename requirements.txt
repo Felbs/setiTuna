@@ -1,7 +1,21 @@
 # setiTuna — hunt for technosignatures in Breakthrough Listen open data
-# cyclo.py (the novel detector) needs only numpy; the BL pipeline needs the rest.
+# Core (everything in the repo runs on these; no GPU, no telescope, no SDR):
 numpy>=1.21
 scipy>=1.7
+matplotlib>=3.5      # waterfall.py figures
+h5py>=3.0            # read BL HDF5 directly (windowed reads of multi-GB files)
+hdf5plugin>=3.0      # BL's bitshuffle filter — without it h5py cannot decompress
+
+# The BL pipeline (star_sweep.py):
 turbo_seti>=2.3.0    # narrowband drift search (Taylor-tree De-Doppler)
 blimpy>=2.0.0        # read/verify BL filterbank + HDF5 data products
-# also required on PATH: curl (star_sweep.py downloads) — ships with Win10+/macOS/Linux
+
+# OPTIONAL, and honestly optional — the repo degrades gracefully without each:
+# astropy>=5.0       # barycentric/LSR velocity correction in natural_signals.py
+#                    #   (without it: topocentric velocities, with a warning)
+# fastmcp>=2.0       # the OPTIONAL MCP companion, tools/setituna_mcp.py
+# cupy               # OPTIONAL GPU path (SETITUNA_GPU=1); numpy is the default
+# setigen            # synthetic injection for completeness audits
+
+# also required on PATH: curl (star_sweep.py / fetch_public_data.py downloads)
+#   — ships with Win10+/macOS/Linux

@@ -5,7 +5,17 @@ no dish required. Validated by detecting **Voyager 1** (carrier + both telemetry
 sidebands, SNR 245, drift −0.38 Hz/s) in Green Bank open data, then re-finding
 it **by structure alone** with our sideband-pair search.
 
+![Voyager 1 drifting](figures/voyager1_drift.png)
+
+*Real data, real drift: Voyager 1's X-band carrier from 19 billion km, sweeping
+−0.3776 Hz/s. Our own loader re-measures the drift rate turboSETI reported for
+this file to four decimal places. This is the only confirmed
+interstellar-distance technosignature anyone has, and it is the standing
+calibration for everything below.*
+
 ## What's here
+
+**The searches**
 - `star_sweep.py` — **point it at a list of nearby stars and walk away.** For
   each target it queries the BL archive, pulls the data, runs turboSETI's drift
   search, and applies RFI forensics (a real signal drifts at *varied* rates;
@@ -16,7 +26,9 @@ it **by structure alone** with our sideband-pair search.
   signature of a *modulated transmitter* (data!), not just a dead carrier.
   Validated: given three anonymous hits, it autonomously flagged Voyager as
   `TRIPLET ... carrier + data sidebands: a TRANSMITTER`.
-- `cyclo.py` — **the frontier: a detector for signals turboSETI is blind to.**
+
+**The novel detectors** (the ones turboSETI is structurally blind to)
+- `cyclo.py` — **the frontier: a detector for signals turboSETI cannot see.**
   A drift search only finds loud narrowband *carriers* — radio like 1950s Earth.
   Anyone slightly ahead of us transmits *spread-spectrum* that looks like pure
   noise in the spectrum. `cyclo.py` catches it via the cyclic autocorrelation:
@@ -29,42 +41,202 @@ it **by structure alone** with our sideband-pair search.
   is the middle; scores it by spectral flatness (`ENTROPY_RESULT.md`).
 - `agent.py` — **the ensemble**: runs the whole novel-detector panel (cyclo +
   comb + entropy) on a capture and reports which fire. `python agent.py selftest`
-  regression-gates all three at once. New detectors drop in and are picked up
-  automatically — how the panel grows toward "try every way of being artificial."
+  regression-gates all three at once.
 - `NOVEL_DETECTORS.md` / `IDEAS.md` — why past SETI probably looked for the
-  wrong thing, and the roadmap of detectors nobody runs (cyclostationarity ✅,
-  frequency combs ✅, entropy/compressibility ✅, zero-drift beacons,
-  polarization, pulsed-timing).
+  wrong thing, and the roadmap of detectors nobody runs.
+
+**The recipe cookbook** — *invent your own way to find aliens*
+- `recipe_api.py` + `cookbook.py` + `recipes/` — a plugin format so **anyone
+  (human or LLM) can contribute a detector**: one small python file, declared
+  interface, auto-discovered, runnable from the CLI, scored against everyone
+  else's on the same public data. Six shipped examples, from the reference
+  narrowband-drift search to a deliberately playful (but genuinely
+  Doppler-invariant) π-ratio hunter. **Start here: [RECIPES.md](RECIPES.md)**,
+  and see who's winning in [LEADERBOARD.md](LEADERBOARD.md).
+
+**Seeing it**
+- `waterfall.py` — spectrograms with the physics drawn on top: drift-rate lines,
+  the FRB dispersion sweep, candidate markers, log-frequency, bandpass removal.
+  Plus two views standard SETI tools don't give you — the **drift-rate/frequency
+  plane** (`hough`) and the **ON/OFF cadence strip** (`cadence`) — and a pulsar
+  `fold`. `python waterfall.py figures` regenerates every figure in these docs.
+- `seti_io.py` — one data type for everything: BL HDF5, SIGPROC filterbank, raw
+  IQ from your own SDR, and physically-correct synthetic scenes so nothing needs
+  a download.
+
+**Knowing what you're looking at**
+- **[SETI_HISTORY.md](SETI_HISTORY.md)** — the real history (Ozma, the Wow!
+  signal, SERENDIP/SETI@home, Breakthrough Listen, the ATA), the candidate events
+  and how each was explained, and — the useful part — **a catalogue of the natural
+  phenomena SETI actually finds instead of aliens**, with the signature each one
+  leaves in a waterfall, and an honest account of what a hobbyist can and cannot
+  detect. Including the truthful answer about black holes.
+- `natural_signals.py` — finds that astrophysics in *your* downloads: measures the
+  galaxy's 21 cm hydrogen line, converts it to a proper LSR velocity, separates
+  sky features from instrument features, and fingerprints the spectrometer's own
+  artifacts.
+- `fetch_public_data.py` — where to get real data showing each phenomenon. Fetch
+  scripts only; no third-party data ships in this repo.
 
 ## Quickstart — hunt for aliens yourself
 ```bash
-pip install -r requirements.txt          # numpy, scipy, turbo_seti, blimpy
-python agent.py selftest                 # prove all 3 novel detectors work (no data needed)
+pip install -r requirements.txt          # numpy, scipy, turbo_seti, blimpy, h5py...
+python agent.py selftest                 # prove all 3 novel detectors work (no data)
+python cookbook.py selftest              # prove all 6 recipes work (no data)
+python cookbook.py bench                 # score every recipe, rewrite the leaderboard
+python cookbook.py run all synth:drift   # run the whole panel on a synthetic scene
 python star_sweep.py GJ699 GJ411 GJ71    # sweep real stars from the BL open archive
-python agent.py capture.cs16 2048000     # run the novel-detector panel on your own IQ
+python natural_signals.py data/*.h5      # find the galaxy's hydrogen in your data
+python waterfall.py figures              # regenerate every figure in these docs
 ```
 `star_sweep.py` needs `curl` on PATH (ships with Windows 10+/macOS/Linux). The
 BL archive is free and public: <http://seti.berkeley.edu/opendata>. Each target
 pulls ~0.2–0.3 GB into `data/` (gitignored) and deletes it after the hunt.
 
+## What's actually in the data (real results, from files on disk)
+
+Every SETI observation is full of the universe. Point our tools at the same
+Green Bank files we used to hunt for aliens around nearby stars, and the
+**galaxy's own neutral hydrogen** is sitting right there at 1420.4 MHz:
+
+![HI line in BL data](figures/hi_survey.png)
+
+| pointing | galactic *l*, *b* | HI velocity (LSR) | peak / continuum | significance |
+|---|---|---|---|---|
+| GJ699 (Barnard's Star) | 31°, +14° | **+3.0 km/s** | ×1.56 | 814 σ |
+| GJ273 (Luyten's Star) | 212°, +10° | **+20.6 km/s** | ×1.36 | 233 σ |
+| GJ411 (Lalande 21185) | 185°, **+65°** | −77 km/s (weak, uncertain) | ×1.11 | 116 σ |
+
+That is the sky, not the receiver, and you can prove it two ways: the line
+**moves** with galactic longitude (a fixed instrumental artifact could not), and
+it **fades** at high galactic latitude where there is less gas to see — GJ411
+looks out of the galaxy at *b* = +65° and the line nearly vanishes. Reproduce
+with `python natural_signals.py data/star_*.h5 --figure figures/hi_survey.png`.
+The same run measures the spectrometer's own artifacts honestly: GBT's coarse
+channels every **2.930 MHz**, 270–327 band-edge dips per file, all instrument.
+
+And here is the shape-recognition guide for everything else — what each
+phenomenon *looks like* in a waterfall, generated from the formulae quoted in
+[SETI_HISTORY.md](SETI_HISTORY.md):
+
+![signature atlas](figures/signature_atlas.png)
+
 ## Architecture
 ```mermaid
 flowchart LR
   BL["Breakthrough Listen open archive<br/>GBT / Parkes filterbank + HDF5"] --> DL["download<br/>(blimpy verifies)"]
-  DL --> TS["turboSETI drift search<br/>Taylor-tree De-Doppler"]
+  DL --> IO["seti_io.Spectrogram<br/>one data type for everything"]
+  IO --> TS["turboSETI drift search<br/>Taylor-tree De-Doppler"]
   TS --> DAT["hit lists (.dat)"]
   DAT --> SB["sideband_pairs.py<br/>drift-locked symmetric families<br/>= MODULATED transmitters"]
   DAT --> FE["find_event cadence filter<br/>(ON-only signals)"]
-  SB --> VER["forensics: explain EVERY hit<br/>(intermod / satellite / harmonic)"]
+  IO --> RC["recipes/ cookbook<br/>anyone's detector, auto-discovered"]
+  IO --> NAT["natural_signals.py<br/>HI / masers / artifacts"]
+  RC --> VER["verdicts: explain EVERY hit<br/>(RFI band / natural line / zero-drift)"]
+  SB --> VER
   FE --> VER
-  VER --> CAND["candidates worth losing sleep over"]
+  NAT --> VER
+  VER --> CAD["ON/OFF cadence<br/>the test that killed BLC-1"]
+  CAD --> CAND["candidates worth losing sleep over"]
+  RC --> BENCH["cookbook.py bench<br/>LEADERBOARD.md"]
   INJ["setigen injections<br/>completeness audit"] -.-> TS
+  IO --> WF["waterfall.py<br/>plot / hough / cadence / fold"]
 ```
 
 ## Honesty rails
-Every hit gets *explained*, not thresholded away. Completeness measured by
-synthetic injection. Negative results published. The one confirmed
-interstellar-distance technosignature (Voyager 1) is the standing calibration.
+Every hit gets *explained*, not thresholded away — `recipe_api.explain()` attaches
+a verdict (known-RFI band, natural spectral line, zero drift, band edge, or
+"unexplained — worth a human") to every candidate any recipe produces. Detectors
+are gated on **false alarms in pure noise** before anything else: a detector that
+fires on noise has found nothing. Completeness measured by synthetic injection.
+Negative results published. The one confirmed interstellar-distance
+technosignature (Voyager 1) is the standing calibration.
 
 Data files are not in the repo (`data/` is gitignored) — fetch from the
-[BL open archive](http://seti.berkeley.edu/opendata).
+[BL open archive](http://seti.berkeley.edu/opendata) with `star_sweep.py` or
+`fetch_public_data.py`.
+
+## Hardware and GPU
+None required. setiTuna analyses archive data — no telescope, no SDR, no dish.
+Any laptop runs everything here; the selftests and every teaching figure need no
+download at all. GPU acceleration is **optional**: set `SETITUNA_GPU=1` and the
+dedispersion/folding loops use `cupy` if it is installed, and the identical numpy
+path runs otherwise. Nothing in this repo ever requires CUDA.
+
+`astropy` is likewise optional — without it `natural_signals.py` reports
+topocentric velocities and says so, instead of LSR-corrected ones.
+
+## Optional: the MCP companion (off by default)
+
+`tools/setituna_mcp.py` exposes setiTuna's verbs to an MCP client (Claude Code,
+Claude Desktop, a local LLM) as 16 typed tools, so a language model can drive a
+search. **It is entirely optional and off by default** — nothing else in the repo
+imports it, and every capability below is available from the command line without
+it.
+
+Why it exists: the bottleneck here is *imagination*, not telescope time. An LLM
+that can read the recipe contract, write a new recipe file, and immediately run
+and score it on the same public data closes the
+hypothesis→experiment→conclusion loop that the rest of this repo does by hand.
+
+<details>
+<summary><b>Exactly what it exposes</b> (click to expand)</summary>
+
+| tool | what it does |
+|---|---|
+| `list_data` | data files in this checkout + the synthetic scenes |
+| `data_info` | one file's header: source, telescope, band, resolution, MJD, pointing |
+| `targets_available` | **the only tool that touches the network**: a read-only query to the public BL archive for a target name. Downloads nothing. |
+| `list_recipes`, `recipe_source`, `recipe_contract` | the cookbook, including full source and the API contract |
+| `run_recipe`, `run_panel` | run one / every recipe on a file, with verdicts |
+| `novel_detector_panel` | cyclo + comb + entropy on a raw IQ capture |
+| `cadence_check` | the ON/OFF verification test |
+| `benchmark`, `leaderboard` | score all recipes on the shared synthetic benchmark |
+| `render_waterfall` | write a spectrogram / hough / fold PNG into `figures/` |
+| `natural_signals`, `sky_or_instrument` | the HI line, LSR velocities, artifacts, sky-vs-instrument |
+| `selftest` | run the repo's regression gates |
+
+</details>
+
+**Privacy facts, plainly:**
+- It is a **local process** speaking MCP over stdio to a client on the same
+  machine. It opens no network port and phones nothing home.
+- **It sends nothing anywhere itself.** The only outbound traffic any tool can
+  cause is `targets_available`'s query to the public BL archive — the same request
+  `star_sweep.py` already makes — and only when called.
+- **Your MCP client is a different question, and it is not ours.** If your client
+  is a cloud LLM, then whatever these tools *return* (file names, candidate lists,
+  numbers) goes to that provider, exactly as if you had pasted it into a chat.
+  Point it at a local model if that matters to you.
+- Filesystem access is **sandboxed to this repo**; paths outside are refused
+  unless you set `SETITUNA_MCP_ALLOW_ANY_PATH=1`.
+- **No radio hardware is touched by anything here.** setiTuna reads archive files.
+
+Enable it:
+```bash
+pip install fastmcp
+cp .mcp.json.example .mcp.json      # Claude Code reads .mcp.json at the repo root
+python tools/setituna_mcp.py        # or run it standalone
+```
+Use the interpreter that has this repo's requirements (`blimpy`, `h5py`,
+`hdf5plugin`) installed — often a conda env rather than bare `python`.
+
+## Credits
+
+This repo is a thin layer of curiosity on top of other people's instruments.
+
+- **Breakthrough Listen** and the **Berkeley SETI Research Center** — the open
+  data that makes all of this possible, released for anyone to use
+  (Lebofsky et al. 2019, *PASP* 131:124505; Price et al. 2020, *AJ* 159:86).
+  <http://seti.berkeley.edu/opendata>
+- **turboSETI** (Enriquez & Price 2019) — the reference narrowband drift search,
+  descended from Taylor's 1974 tree de-dispersion algorithm.
+- **blimpy** (Price et al. 2019) — reading BL filterbank/HDF5 products.
+- **setigen** (Brzycki et al. 2022) — synthetic signal injection.
+- **astropy** — coordinate frames and the barycentric velocity correction.
+- **e-CALLISTO** (Benz, Monstein & Meyer 2005, *Solar Physics* 226:143) and
+  **CHIME/FRB** (CHIME/FRB Collaboration 2021, *ApJS* 257:59) — public data for
+  the natural phenomena in `SETI_HISTORY.md`.
+- The people whose false alarms taught everyone how to do this properly, from
+  Jocelyn Bell Burnell's LGM-1 to Emily Petroff's microwave oven. See
+  [SETI_HISTORY.md](SETI_HISTORY.md).
