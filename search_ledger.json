@@ -1,0 +1,39 @@
+{
+  "runs": [
+    {
+      "when": "2026-07-30T14:53:34.027137+00:00",
+      "path": "Z:\\src\\setiTuna\\data\\Voyager1.single_coarse.fine_res.h5",
+      "file": "Voyager1.single_coarse.fine_res.h5",
+      "target": "Voyager1",
+      "recipe": "doppler_coherence",
+      "n_candidates": 1,
+      "n_unexplained": 1,
+      "f_lo_mhz": 8418.457032646984,
+      "f_hi_mhz": 8421.386717353016,
+      "bandwidth_mhz": 2.929685,
+      "duration_s": 292.057776128,
+      "res_hz": 2.7939677238464355,
+      "drift_max_hz_s": null,
+      "bytes_read": 50549227,
+      "note": "carrier + 22.34 kHz sidebands, accel +0.0136 m/s^2"
+    },
+    {
+      "when": "2026-07-30T15:42:19.056028+00:00",
+      "path": "data\\star_GJ699.h5",
+      "file": "star_GJ699.h5",
+      "target": "GJ699",
+      "recipe": "all",
+      "n_candidates": 44,
+      "n_unexplained": 6,
+      "f_lo_mhz": null,
+      "f_hi_mhz": null,
+      "bandwidth_mhz": null,
+      "duration_s": null,
+      "res_hz": null,
+      "drift_max_hz_s": null,
+      "bytes_read": 199715980,
+      "note": "Barnard's Star L-band panel; survivors all instrumental (see note)"
+    }
+  ],
+  "created": "2026-07-30T14:53:34.027137+00:00"
+}

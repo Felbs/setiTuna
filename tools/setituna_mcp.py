@@ -438,5 +438,168 @@ def selftest() -> dict:
     return res
 
 
+# ------------------------------------------------------- getting more haystack
+@mcp.tool
+def fetch_data(what: str = "list", target: str = None, timeout_s: int = 1800) -> dict:
+    """DOWNLOAD public telescope data into data/ so there is something to search.
+
+    This is the tool that actually moves the needle: the repo ships no data, and a
+    detector with one file is a demo, not a search. Wraps fetch_public_data.py,
+    which only ever pulls from the public archives it credits.
+
+    what: 'list' (default, downloads nothing and shows the catalogue) |
+          'voyager' (the standing calibration signal) |
+          'bl' (a Breakthrough Listen nearby-star pointing; pass target=) |
+          'callisto' (solar radio bursts, small) | 'frb' | 'pulsar'
+
+    NETWORK: yes, this one downloads. Everything else in this server is local.
+    Files land in data/, which is gitignored. Sizes are in the catalogue — check
+    with what='list' before pulling a BL pointing.
+    """
+    cmd = [sys.executable, "fetch_public_data.py", what]
+    if target:
+        cmd += ["--target", target]
+    try:
+        pr = subprocess.run(cmd, cwd=REPO, capture_output=True, text=True,
+                            timeout=timeout_s)
+    except subprocess.TimeoutExpired:
+        return {"error": f"timed out after {timeout_s}s — a BL pointing can be "
+                         f"several GB; raise timeout_s or fetch from a shell"}
+    except Exception as e:
+        return {"error": f"{type(e).__name__}: {e}"}
+    have = sorted(x.name for x in (REPO / "data").glob("*")
+                  if x.suffix in (".h5", ".fil", ".dat", ".cs16"))
+    return {"what": what, "target": target, "ok": pr.returncode == 0,
+            "stdout_tail": (pr.stdout or "")[-1500:],
+            "stderr_tail": (pr.stderr or "")[-600:],
+            "data_dir_now": have,
+            "next": "run_recipe / run_panel on the new file, then ledger_record "
+                    "so it counts toward coverage"}
+
+
+# ------------------------------------------------------- authoring a detector
+@mcp.tool
+def propose_recipe(name: str, source: str, overwrite: bool = False) -> dict:
+    """WRITE a new detector recipe and immediately prove it on the controls.
+
+    The gap this closes: an LLM could read the contract and run recipes, but not
+    AUTHOR one, so every new detector had to be written outside the loop. Now the
+    hypothesis -> experiment -> conclusion cycle closes inside MCP.
+
+    THE HOUSE RULE IS ENFORCED MECHANICALLY, NOT SUGGESTED: the file is staged
+    under a temporary name, its selftest is run, and it is installed into
+    recipes/ ONLY if that selftest passes. A detector that fires on pure noise
+    has found nothing (RECIPES.md), so this refuses to install it and says why.
+    Nothing is ever silently kept.
+
+    name:   recipe name, becomes recipes/<name>.py
+    source: the complete Python file (see recipe_contract() for the format)
+    """
+    import re as _re
+    if not _re.fullmatch(r"[a-z][a-z0-9_]{2,40}", name or ""):
+        return {"installed": False,
+                "why": "name must be lower_snake_case, 3-41 chars"}
+    final = REPO / "recipes" / f"{name}.py"
+    if final.exists() and not overwrite:
+        return {"installed": False,
+                "why": f"recipes/{name}.py exists; pass overwrite=True to replace"}
+    staged = REPO / "recipes" / f"_staged_{name}.py"
+    try:
+        staged.write_text(source, encoding="utf-8")
+    except Exception as e:
+        return {"installed": False, "why": f"could not write: {e}"}
+    try:
+        pr = subprocess.run([sys.executable, staged.name],
+                            cwd=str(REPO / "recipes"),
+                            capture_output=True, text=True, timeout=900)
+        out = ((pr.stdout or "") + (pr.stderr or ""))[-1800:]
+        if pr.returncode != 0:
+            return {"installed": False,
+                    "why": "selftest FAILED — not installed. A recipe must find "
+                           "its own signal AND stay silent on noise and on the "
+                           "WRONG signal (RECIPES.md, 'the one rule').",
+                    "selftest_output": out}
+        staged.replace(final)
+        recs, _broken = R.discover()
+        return {"installed": True, "path": f"recipes/{name}.py",
+                "selftest_output": out,
+                "discovered": any(r.info().get("name") == name for r in recs),
+                "next": "benchmark() to score it on the shared scenes, then "
+                        "run_recipe on real data"}
+    except subprocess.TimeoutExpired:
+        return {"installed": False, "why": "selftest timed out (>900 s)"}
+    finally:
+        if staged.exists():
+            try:
+                staged.unlink()
+            except OSError:
+                pass
+
+
+# ------------------------------------------------------------ what is covered
+@mcp.tool
+def ledger_record(path: str, recipe: str, target: str = None,
+                  n_candidates: int = 0, n_unexplained: int = 0,
+                  note: str = "") -> dict:
+    """Record that a file was searched with a recipe, so the search has a
+    denominator. A null result is only worth something if you can say what you
+    covered — this is what turns 'we found nothing' into a limit."""
+    sys.path.insert(0, str(REPO))
+    import search_ledger
+    f = _safe(path)
+    meta = {}
+    try:
+        sp = seti_io.open_any(str(f))
+        meta = dict(f_lo_mhz=float(sp.f_lo), f_hi_mhz=float(sp.f_hi),
+                    duration_s=float(sp.duration_s),
+                    res_hz=float(abs(sp.res_hz)),
+                    target=target or (sp.meta or {}).get("source_name"))
+    except Exception:
+        meta = dict(target=target)
+    tgt = meta.pop("target", target)
+    row = search_ledger.record(str(f), recipe, target=tgt,
+                               n_candidates=n_candidates,
+                               n_unexplained=n_unexplained, note=note, **meta)
+    return {"recorded": row, "coverage_now": search_ledger.coverage()}
+
+
+@mcp.tool
+def coverage() -> dict:
+    """HOW MUCH OF THE HAYSTACK HAVE WE LIFTED? Percent of the public archive
+    searched, targets covered, integrated bandwidth and time.
+
+    Reports several denominators and deliberately refuses to collapse them into
+    one number: bytes-of-archive is honest about scale but measures EFFORT, not
+    insight — two recipes on the same file cover different signal space. The
+    archive size is an order-of-magnitude estimate (~1 PB; Lebofsky et al. 2019,
+    Price et al. 2020) and is overridable via SETI_ARCHIVE_BYTES."""
+    sys.path.insert(0, str(REPO))
+    import search_ledger
+    return search_ledger.coverage()
+
+
+@mcp.tool
+def gpu_status() -> dict:
+    """Is a GPU actually usable, and is it worth it? setiTuna's array module
+    switches to cupy only when SETITUNA_GPU=1 AND a device really exists."""
+    import numpy as _np
+    info = {"env_SETITUNA_GPU": os.environ.get("SETITUNA_GPU", "0"),
+            "measured_speedup_note":
+                "doppler_coherence on the 16x1048576 Voyager file: 92.1 s CPU "
+                "vs 4.4 s GPU = 21x, identical result. NOTE the CPU and GPU "
+                "paths use DIFFERENT algorithms on purpose — an index-gather "
+                "beats np.roll on a GPU and loses to it badly on a CPU (204 s)."}
+    try:
+        import cupy
+        cupy.zeros(1)
+        prop = cupy.cuda.runtime.getDeviceProperties(0)
+        info.update(available=True, cupy=cupy.__version__,
+                    device=prop["name"].decode(),
+                    active=seti_io.xp() is not _np)
+    except Exception as e:
+        info.update(available=False, why=f"{type(e).__name__}: {e}", active=False)
+    return info
+
+
 if __name__ == "__main__":
     mcp.run()

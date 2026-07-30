@@ -1,0 +1,341 @@
+{
+  "target": "GJ699",
+  "f_start": 1400.0,
+  "f_stop": 1500.0,
+  "window_mhz": 2.9296875,
+  "scans": [
+    [
+      "ON",
+      "spliced_blc02030405_2bit_guppi_57457_48006_GJ699_0003.gpuspec.0000.h5"
+    ],
+    [
+      "OFF",
+      "spliced_blc02030405_2bit_guppi_57457_48334_GJ699_OFF_0004.gpuspec.0000.h5"
+    ],
+    [
+      "ON",
+      "spliced_blc02030405_2bit_guppi_57457_48661_GJ699_0005.gpuspec.0000.h5"
+    ],
+    [
+      "OFF",
+      "spliced_blc02030405_2bit_guppi_57457_48988_GJ699_OFF_0006.gpuspec.0000.h5"
+    ],
+    [
+      "ON",
+      "spliced_blc02030405_2bit_guppi_57457_49314_GJ699_0007.gpuspec.0000.h5"
+    ],
+    [
+      "OFF",
+      "spliced_blc02030405_2bit_guppi_57457_49640_GJ699_OFF_0008.gpuspec.0000.h5"
+    ]
+  ],
+  "elapsed_s": 828.099826335907,
+  "windows": [
+    {
+      "f0": 1400.0,
+      "f1": 1402.9296875,
+      "n_on": 4,
+      "n_off": 4,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1402.9296875,
+      "f1": 1405.859375,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1405.859375,
+      "f1": 1408.7890625,
+      "n_on": 21,
+      "n_off": 26,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1408.7890625,
+      "f1": 1411.71875,
+      "n_on": 12,
+      "n_off": 13,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1411.71875,
+      "f1": 1414.6484375,
+      "n_on": 3,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1414.6484375,
+      "f1": 1417.578125,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1417.578125,
+      "f1": 1420.5078125,
+      "n_on": 30,
+      "n_off": 31,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1420.5078125,
+      "f1": 1423.4375,
+      "n_on": 11,
+      "n_off": 16,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1423.4375,
+      "f1": 1426.3671875,
+      "n_on": 3,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1426.3671875,
+      "f1": 1429.296875,
+      "n_on": 3,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1429.296875,
+      "f1": 1432.2265625,
+      "n_on": 3,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1432.2265625,
+      "f1": 1435.15625,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1435.15625,
+      "f1": 1438.0859375,
+      "n_on": 24,
+      "n_off": 21,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1438.0859375,
+      "f1": 1441.015625,
+      "n_on": 6,
+      "n_off": 5,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1441.015625,
+      "f1": 1443.9453125,
+      "n_on": 26,
+      "n_off": 20,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1443.9453125,
+      "f1": 1446.875,
+      "n_on": 30,
+      "n_off": 30,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1446.875,
+      "f1": 1449.8046875,
+      "n_on": 30,
+      "n_off": 30,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1449.8046875,
+      "f1": 1452.734375,
+      "n_on": 38,
+      "n_off": 34,
+      "n_survive": 3,
+      "errors": []
+    },
+    {
+      "f0": 1452.734375,
+      "f1": 1455.6640625,
+      "n_on": 5,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1455.6640625,
+      "f1": 1458.59375,
+      "n_on": 10,
+      "n_off": 9,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1458.59375,
+      "f1": 1461.5234375,
+      "n_on": 4,
+      "n_off": 4,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1461.5234375,
+      "f1": 1464.453125,
+      "n_on": 6,
+      "n_off": 5,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1464.453125,
+      "f1": 1467.3828125,
+      "n_on": 3,
+      "n_off": 5,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1467.3828125,
+      "f1": 1470.3125,
+      "n_on": 5,
+      "n_off": 5,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1470.3125,
+      "f1": 1473.2421875,
+      "n_on": 4,
+      "n_off": 2,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1473.2421875,
+      "f1": 1476.171875,
+      "n_on": 4,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1476.171875,
+      "f1": 1479.1015625,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1479.1015625,
+      "f1": 1482.03125,
+      "n_on": 1,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1482.03125,
+      "f1": 1484.9609375,
+      "n_on": 4,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1484.9609375,
+      "f1": 1487.890625,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1487.890625,
+      "f1": 1490.8203125,
+      "n_on": 3,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1490.8203125,
+      "f1": 1493.75,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1493.75,
+      "f1": 1496.6796875,
+      "n_on": 1,
+      "n_off": 2,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1496.6796875,
+      "f1": 1499.609375,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1499.609375,
+      "f1": 1500.0,
+      "n_on": 9,
+      "n_off": 7,
+      "n_survive": 0,
+      "errors": []
+    }
+  ],
+  "survivors": [
+    {
+      "freq_mhz": 1451.9481966115086,
+      "score": 9.70239061593356,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 1.1 kHz, flatness 0.816",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1451.9480420765722,
+      "score": 9.657555452136467,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 3.2 kHz, flatness 0.892",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1451.9479811132487,
+      "score": 9.84999106251373,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 4.1 kHz, flatness 0.907",
+      "verdict": "unexplained - worth a human"
+    }
+  ]
+}

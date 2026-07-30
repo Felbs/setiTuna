@@ -1,0 +1,725 @@
+{
+  "target": "GJ699",
+  "f_start": 1400.0,
+  "f_stop": 1500.0,
+  "window_mhz": 2.9296875,
+  "scans": [
+    [
+      "ON",
+      "spliced_blc02030405_2bit_guppi_57457_48006_GJ699_0003.gpuspec.0000.h5"
+    ],
+    [
+      "OFF",
+      "spliced_blc02030405_2bit_guppi_57457_48334_GJ699_OFF_0004.gpuspec.0000.h5"
+    ],
+    [
+      "ON",
+      "spliced_blc02030405_2bit_guppi_57457_48661_GJ699_0005.gpuspec.0000.h5"
+    ],
+    [
+      "OFF",
+      "spliced_blc02030405_2bit_guppi_57457_48988_GJ699_OFF_0006.gpuspec.0000.h5"
+    ],
+    [
+      "ON",
+      "spliced_blc02030405_2bit_guppi_57457_49314_GJ699_0007.gpuspec.0000.h5"
+    ],
+    [
+      "OFF",
+      "spliced_blc02030405_2bit_guppi_57457_49640_GJ699_OFF_0008.gpuspec.0000.h5"
+    ]
+  ],
+  "elapsed_s": 835.3219094276428,
+  "windows": [
+    {
+      "f0": 1400.0,
+      "f1": 1402.9296875,
+      "n_on": 4,
+      "n_off": 4,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1402.9296875,
+      "f1": 1405.859375,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1405.859375,
+      "f1": 1408.7890625,
+      "n_on": 21,
+      "n_off": 26,
+      "n_survive": 3,
+      "errors": []
+    },
+    {
+      "f0": 1408.7890625,
+      "f1": 1411.71875,
+      "n_on": 12,
+      "n_off": 13,
+      "n_survive": 1,
+      "errors": []
+    },
+    {
+      "f0": 1411.71875,
+      "f1": 1414.6484375,
+      "n_on": 3,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1414.6484375,
+      "f1": 1417.578125,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1417.578125,
+      "f1": 1420.5078125,
+      "n_on": 30,
+      "n_off": 31,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1420.5078125,
+      "f1": 1423.4375,
+      "n_on": 11,
+      "n_off": 16,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1423.4375,
+      "f1": 1426.3671875,
+      "n_on": 3,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1426.3671875,
+      "f1": 1429.296875,
+      "n_on": 3,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1429.296875,
+      "f1": 1432.2265625,
+      "n_on": 3,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1432.2265625,
+      "f1": 1435.15625,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1435.15625,
+      "f1": 1438.0859375,
+      "n_on": 24,
+      "n_off": 21,
+      "n_survive": 1,
+      "errors": []
+    },
+    {
+      "f0": 1438.0859375,
+      "f1": 1441.015625,
+      "n_on": 6,
+      "n_off": 5,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1441.015625,
+      "f1": 1443.9453125,
+      "n_on": 26,
+      "n_off": 20,
+      "n_survive": 7,
+      "errors": []
+    },
+    {
+      "f0": 1443.9453125,
+      "f1": 1446.875,
+      "n_on": 30,
+      "n_off": 30,
+      "n_survive": 14,
+      "errors": []
+    },
+    {
+      "f0": 1446.875,
+      "f1": 1449.8046875,
+      "n_on": 30,
+      "n_off": 30,
+      "n_survive": 8,
+      "errors": []
+    },
+    {
+      "f0": 1449.8046875,
+      "f1": 1452.734375,
+      "n_on": 38,
+      "n_off": 34,
+      "n_survive": 11,
+      "errors": []
+    },
+    {
+      "f0": 1452.734375,
+      "f1": 1455.6640625,
+      "n_on": 5,
+      "n_off": 3,
+      "n_survive": 1,
+      "errors": []
+    },
+    {
+      "f0": 1455.6640625,
+      "f1": 1458.59375,
+      "n_on": 10,
+      "n_off": 9,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1458.59375,
+      "f1": 1461.5234375,
+      "n_on": 4,
+      "n_off": 4,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1461.5234375,
+      "f1": 1464.453125,
+      "n_on": 6,
+      "n_off": 5,
+      "n_survive": 1,
+      "errors": []
+    },
+    {
+      "f0": 1464.453125,
+      "f1": 1467.3828125,
+      "n_on": 3,
+      "n_off": 5,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1467.3828125,
+      "f1": 1470.3125,
+      "n_on": 5,
+      "n_off": 5,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1470.3125,
+      "f1": 1473.2421875,
+      "n_on": 4,
+      "n_off": 2,
+      "n_survive": 1,
+      "errors": []
+    },
+    {
+      "f0": 1473.2421875,
+      "f1": 1476.171875,
+      "n_on": 4,
+      "n_off": 3,
+      "n_survive": 1,
+      "errors": []
+    },
+    {
+      "f0": 1476.171875,
+      "f1": 1479.1015625,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1479.1015625,
+      "f1": 1482.03125,
+      "n_on": 1,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1482.03125,
+      "f1": 1484.9609375,
+      "n_on": 4,
+      "n_off": 3,
+      "n_survive": 1,
+      "errors": []
+    },
+    {
+      "f0": 1484.9609375,
+      "f1": 1487.890625,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1487.890625,
+      "f1": 1490.8203125,
+      "n_on": 3,
+      "n_off": 3,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1490.8203125,
+      "f1": 1493.75,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1493.75,
+      "f1": 1496.6796875,
+      "n_on": 1,
+      "n_off": 2,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1496.6796875,
+      "f1": 1499.609375,
+      "n_on": 0,
+      "n_off": 0,
+      "n_survive": 0,
+      "errors": []
+    },
+    {
+      "f0": 1499.609375,
+      "f1": 1500.0,
+      "n_on": 9,
+      "n_off": 7,
+      "n_survive": 1,
+      "errors": []
+    }
+  ],
+  "survivors": [
+    {
+      "freq_mhz": 1407.9751004312627,
+      "score": 8.93012478252467,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.3 kHz, flatness 0.651",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1407.97207069586,
+      "score": 9.365364243417739,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.2 kHz, flatness 0.551",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1407.972846206045,
+      "score": 9.345092578754164,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.7 kHz, flatness 0.731",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1410.0376966569067,
+      "score": 51.983145352029716,
+      "drift_hz_s": 0.23647293047225917,
+      "recipe": "doppler_coherence",
+      "label": "2 tones sharing fdot/f = 1.502e-10 /s => line-of-sight accel -0.0450 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1437.6403271738436,
+      "score": 22.1497440724308,
+      "drift_hz_s": 0.059118232618064794,
+      "recipe": "doppler_coherence",
+      "label": "2 tones sharing fdot/f = 4.798e-11 /s => line-of-sight accel -0.0144 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1442.6540699893585,
+      "score": 39.84351710871985,
+      "drift_hz_s": 0.10838342646645212,
+      "recipe": "doppler_coherence",
+      "label": "4 tones sharing fdot/f = 7.513e-11 /s => line-of-sight accel -0.0225 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1442.74217758708,
+      "score": 13.175632244820553,
+      "drift_hz_s": 0.03941215507870986,
+      "recipe": "doppler_coherence",
+      "label": "2 tones sharing fdot/f = 2.049e-11 /s => line-of-sight accel -0.0061 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1442.7072810465093,
+      "score": 31.206983159460354,
+      "drift_hz_s": 0.03941215507870986,
+      "recipe": "doppler_coherence",
+      "label": "3 tones sharing fdot/f = 3.642e-11 /s => line-of-sight accel -0.0109 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1442.1550128812005,
+      "score": 12.068471733084966,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 2.1 kHz, flatness 0.877",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1442.6599196329107,
+      "score": 39.845469073725845,
+      "drift_hz_s": -0.029559116309032397,
+      "recipe": "doppler_coherence",
+      "label": "4 tones sharing fdot/f = -3.415e-11 /s => line-of-sight accel +0.0102 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1442.154479806558,
+      "score": 10.031401445574637,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.3 kHz, flatness 0.582",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1442.1553573948659,
+      "score": 10.772675588197378,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.3 kHz, flatness 0.593",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.485147013064,
+      "score": 8.755980713363018,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.3 kHz, flatness 0.554",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.468954870793,
+      "score": 9.118969118494075,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.4 kHz, flatness 0.621",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.4712048427555,
+      "score": 9.920536301684583,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.4 kHz, flatness 0.684",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.472056911533,
+      "score": 9.135995785735297,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.2 kHz, flatness 0.563",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.4730691862533,
+      "score": 9.178341321034596,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.3 kHz, flatness 0.619",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.4736419579438,
+      "score": 9.666968491033792,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.4 kHz, flatness 0.688",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.4740304219122,
+      "score": 9.311303512304214,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.3 kHz, flatness 0.566",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.4750512031428,
+      "score": 9.542501448148746,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.4 kHz, flatness 0.648",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.4758323843346,
+      "score": 9.631462722343853,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.3 kHz, flatness 0.639",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.4964181391524,
+      "score": 8.945332981545295,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.4 kHz, flatness 0.628",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.497297145212,
+      "score": 9.198963303252162,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.4 kHz, flatness 0.702",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.4976912801874,
+      "score": 8.984142024773572,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.3 kHz, flatness 0.583",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.4998207432545,
+      "score": 9.859668514939097,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.3 kHz, flatness 0.591",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1446.5006756475352,
+      "score": 9.806059208755583,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.5 kHz, flatness 0.680",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1447.0202773957117,
+      "score": 39.31192787287191,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 290.4 kHz, flatness 0.892",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1447.0269805257926,
+      "score": 42.035740652358776,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 303.8 kHz, flatness 0.885",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1447.1827262220581,
+      "score": 9.743103813849851,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.4 kHz, flatness 0.632",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1447.1839752613141,
+      "score": 9.72989806755617,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 2.1 kHz, flatness 0.854",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1447.1862890321036,
+      "score": 9.631419028768702,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 2.5 kHz, flatness 0.901",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1447.188056968485,
+      "score": 9.21174381515644,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.5 kHz, flatness 0.697",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1447.1888750112212,
+      "score": 9.797638469788614,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.8 kHz, flatness 0.785",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1447.1712410154619,
+      "score": 9.16392462125775,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.9 kHz, flatness 0.804",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1452.6501042164707,
+      "score": 13.186582164362349,
+      "drift_hz_s": 2.7982630105884003,
+      "recipe": "doppler_coherence",
+      "label": "2 tones sharing fdot/f = 1.926e-09 /s => line-of-sight accel -0.5775 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1449.982439916363,
+      "score": 12.769489220862138,
+      "drift_hz_s": -0.3547093957083888,
+      "recipe": "doppler_coherence",
+      "label": "2 tones sharing fdot/f = -2.614e-10 /s => line-of-sight accel +0.0784 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1452.7029353161633,
+      "score": 12.304023458793491,
+      "drift_hz_s": 0.7488309464954874,
+      "recipe": "doppler_coherence",
+      "label": "2 tones sharing fdot/f = 5.121e-10 /s => line-of-sight accel -0.1535 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1452.7126355733578,
+      "score": 11.96662613435282,
+      "drift_hz_s": -3.6850364998593723,
+      "recipe": "doppler_coherence",
+      "label": "2 tones sharing fdot/f = -2.532e-09 /s => line-of-sight accel +0.7592 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1451.9466200716079,
+      "score": 9.098205556917991,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.3 kHz, flatness 0.573",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1451.947224033836,
+      "score": 9.525808373696796,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.9 kHz, flatness 0.782",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1451.9481966115086,
+      "score": 9.70239061593356,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 1.1 kHz, flatness 0.816",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1451.9480420765722,
+      "score": 9.657555452136467,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 3.2 kHz, flatness 0.892",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1452.341977148746,
+      "score": 18.30149812438577,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 784.6 kHz, flatness 0.977",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1451.9479811132487,
+      "score": 9.84999106251373,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 4.1 kHz, flatness 0.907",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1452.3421515322063,
+      "score": 18.689918992981948,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 784.3 kHz, flatness 0.980",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1452.7377921596865,
+      "score": 12.522215838374388,
+      "drift_hz_s": 0.03941215507870986,
+      "recipe": "doppler_coherence",
+      "label": "2 tones sharing fdot/f = 2.713e-11 /s => line-of-sight accel -0.0081 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1462.1736046344013,
+      "score": 91.55647212319069,
+      "drift_hz_s": -0.03941215507870986,
+      "recipe": "doppler_coherence",
+      "label": "4 tones sharing fdot/f = -1.011e-11 /s => line-of-sight accel +0.0030 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1470.7015512956027,
+      "score": 14.015595104824335,
+      "drift_hz_s": -0.10838342646645212,
+      "recipe": "doppler_coherence",
+      "label": "2 tones sharing fdot/f = -8.039e-11 /s => line-of-sight accel +0.0241 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1475.00105631954,
+      "score": 13.813337714040424,
+      "drift_hz_s": 0.09853038769677466,
+      "recipe": "doppler_coherence",
+      "label": "2 tones sharing fdot/f = 7.014e-11 /s => line-of-sight accel -0.0210 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1483.493491135929,
+      "score": 13.650623894950611,
+      "drift_hz_s": 0.0886773489270972,
+      "recipe": "doppler_coherence",
+      "label": "2 tones sharing fdot/f = 5.645e-11 /s => line-of-sight accel -0.0169 m/s^2 (narrow span: fractional part not yet tested)",
+      "verdict": "unexplained - worth a human"
+    },
+    {
+      "freq_mhz": 1499.9795390073325,
+      "score": 52.339795100850644,
+      "drift_hz_s": 0.0,
+      "recipe": "spread_flatness",
+      "label": "wide flat excess band 0.3 kHz, flatness 0.553",
+      "verdict": "unexplained - worth a human"
+    }
+  ]
+}

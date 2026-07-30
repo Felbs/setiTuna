@@ -5,3 +5,9 @@ deephunt.log
 *.log
 _dl_url.txt
 __pycache__/
+
+# transient run logs
+*.err
+cadence_fetch*.log
+cadence_run.log
+search_*.log
