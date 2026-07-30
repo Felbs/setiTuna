@@ -1,0 +1,146 @@
+{
+ "rows": [
+  {
+   "recipe": "narrowband_drift",
+   "version": "1.0",
+   "author": "setiTuna",
+   "caught": [
+    "drift_loud",
+    "drift_faint",
+    "comb"
+   ],
+   "missed": [
+    "spread",
+    "frb_dm560",
+    "pulsar_B0329",
+    "hi_line"
+   ],
+   "false_alarms": [],
+   "runtime_s": 0.393,
+   "errors": [],
+   "n_caught": 3,
+   "n_fa": 0,
+   "clean": true
+  },
+  {
+   "recipe": "spread_flatness",
+   "version": "1.0",
+   "author": "setiTuna",
+   "caught": [
+    "spread",
+    "hi_line"
+   ],
+   "missed": [
+    "drift_loud",
+    "drift_faint",
+    "comb",
+    "frb_dm560",
+    "pulsar_B0329"
+   ],
+   "false_alarms": [],
+   "runtime_s": 0.016,
+   "errors": [],
+   "n_caught": 2,
+   "n_fa": 0,
+   "clean": true
+  },
+  {
+   "recipe": "comb_uniformity",
+   "version": "1.0",
+   "author": "setiTuna",
+   "caught": [
+    "comb"
+   ],
+   "missed": [
+    "drift_loud",
+    "drift_faint",
+    "spread",
+    "frb_dm560",
+    "pulsar_B0329",
+    "hi_line"
+   ],
+   "false_alarms": [],
+   "runtime_s": 0.016,
+   "errors": [],
+   "n_caught": 1,
+   "n_fa": 0,
+   "clean": true
+  },
+  {
+   "recipe": "hi_line_natural",
+   "version": "1.0",
+   "author": "setiTuna",
+   "caught": [
+    "hi_line"
+   ],
+   "missed": [
+    "drift_loud",
+    "drift_faint",
+    "comb",
+    "spread",
+    "frb_dm560",
+    "pulsar_B0329"
+   ],
+   "false_alarms": [],
+   "runtime_s": 0.377,
+   "errors": [],
+   "n_caught": 1,
+   "n_fa": 0,
+   "clean": true
+  },
+  {
+   "recipe": "dispersion_sweep",
+   "version": "1.0",
+   "author": "setiTuna",
+   "caught": [
+    "frb_dm560"
+   ],
+   "missed": [
+    "drift_loud",
+    "drift_faint",
+    "comb",
+    "spread",
+    "pulsar_B0329",
+    "hi_line"
+   ],
+   "false_alarms": [],
+   "runtime_s": 0.693,
+   "errors": [],
+   "n_caught": 1,
+   "n_fa": 0,
+   "clean": true
+  },
+  {
+   "recipe": "pi_ratio",
+   "version": "1.0",
+   "author": "setiTuna (deliberately playful, genuinely Doppler-invariant)",
+   "caught": [],
+   "missed": [
+    "drift_loud",
+    "drift_faint",
+    "comb",
+    "spread",
+    "frb_dm560",
+    "pulsar_B0329",
+    "hi_line"
+   ],
+   "false_alarms": [],
+   "runtime_s": 0.0,
+   "errors": [],
+   "n_caught": 0,
+   "n_fa": 0,
+   "clean": true
+  }
+ ],
+ "scenes": [
+  "drift_loud",
+  "drift_faint",
+  "comb",
+  "spread",
+  "frb_dm560",
+  "pulsar_B0329",
+  "hi_line",
+  "NULL_noise",
+  "NULL_noise2"
+ ]
+}
