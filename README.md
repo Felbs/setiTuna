@@ -93,6 +93,79 @@ python waterfall.py figures              # regenerate every figure in these docs
 BL archive is free and public: <http://seti.berkeley.edu/opendata>. Each target
 pulls ~0.2–0.3 GB into `data/` (gitignored) and deletes it after the hunt.
 
+### Getting the data (this repo ships none)
+
+**No telescope data is in this repository and none ever will be** — it is other
+people's data, it is enormous, and it is already free. `data/` is gitignored.
+Everything below downloads from the public Breakthrough Listen archive into that
+folder, and every script here expects to find it there.
+
+**Where it goes:** `setiTuna/data/`. Create it if it does not exist; the fetchers
+create it for you. Nothing else needs configuring — the tools glob that folder.
+
+**Step by step, from nothing to a real search:**
+
+```bash
+# 0. one-time setup
+pip install -r requirements.txt
+pip install hdf5plugin                  # REQUIRED: BL files are bitshuffle-
+                                        # compressed. Without it h5py fails with
+                                        # a cryptic "can't open directory".
+
+# 1. prove the software works before spending a single byte of bandwidth
+python cookbook.py selftest             # every recipe, no data needed
+python cookbook.py bench                # scores them on synthetic scenes
+
+# 2. smallest possible real file (~50 MB): Voyager 1, the standing calibration.
+#    A real spacecraft carrier at interstellar distance — if your pipeline
+#    cannot find THIS, it cannot find anything.
+python fetch_public_data.py voyager
+python cookbook.py run all data/Voyager1.single_coarse.fine_res.h5
+
+# 3. a single pointing at a nearby star (~0.2 GB)
+python fetch_public_data.py bl --target GJ699        # Barnard's Star
+python cookbook.py run all data/star_GJ699.h5
+
+# 4. THE REAL TEST: a full ON/OFF cadence (~77 GB, allow ~40 min).
+#    Six scans: target, blank sky, target, blank sky, target, blank sky.
+python fetch_cadence.py --target GJ699 --n 6 --dry-run   # check size FIRST
+python fetch_cadence.py --target GJ699 --n 6             # then pull it
+python cadence_search.py --target GJ699 --f-start 1400 --f-stop 1500
+
+# 5. record what you covered, so a null result means something
+python search_ledger.py coverage
+```
+
+**Pick a target:** `python -c "import tools.setituna_mcp"` is not needed — just
+query the archive by name. Good nearby ones: `GJ699` (Barnard's Star, 6 ly),
+`GJ411`, `GJ15A`, `GJ273` (Luyten's Star), `GJ581`. Any BL target name works.
+
+**Reading the result.** `cadence_search.py` prints `ON-only survivors`. Zero is
+the normal, correct, honest answer and it is what everyone who has ever done this
+has gotten. A survivor is **not** a detection — it is something not yet
+explained, which is a much weaker claim. Before believing one:
+
+1. Is its drift exactly `0.000` Hz/s? Then it is bolted to the ground with you.
+   A sky source *must* Doppler-drift; Earth's rotation alone gives 0.05–0.3 Hz/s
+   at L band.
+2. Is it on a round number, or in a band in `recipe_api.RFI_BANDS`? Aircraft
+   telemetry, GPS, Iridium and satellite downlinks produce beautiful candidates.
+3. Does it appear in **all** the ON scans? Intermittent interference shows up in
+   one and looks exactly like a discovery.
+4. Is it absurdly narrow? A 5.7 Hz feature at 1.4 GHz is a fractional bandwidth
+   of 4e-9. Nothing astrophysical is that monochromatic — that is a machine,
+   ours or somebody's.
+
+BLC-1, the best modern SETI candidate, passed more checks than anything you will
+find here and was still local interference (Sheikh et al. 2021, *Nature
+Astronomy* 5, 1153). Assume the same and try hard to kill your own hit.
+
+**Disk and time budget:** one fine-frequency scan is ~12.8 GB and covers the
+whole 750 MHz L-band at 2.836 Hz — 264,503,296 channels, 16 integrations of
+18 s, 288 s total. A six-scan cadence is ~77 GB. A 100 MHz search across all six
+takes about 14 minutes on a GPU, a few hours on CPU. The files are gitignored;
+delete them when you are done.
+
 ## What's actually in the data (real results, from files on disk)
 
 Every SETI observation is full of the universe. Point our tools at the same
