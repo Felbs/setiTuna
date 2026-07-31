@@ -7,7 +7,9 @@ it **by structure alone** with our sideband-pair search.
 
 ![Voyager 1 drifting](figures/voyager1_drift.png)
 
-*Real data, real drift: Voyager 1's X-band carrier from 19 billion km, sweeping
+*Real data, real drift: Voyager 1's X-band carrier (8421.39 MHz) from ~20 billion km
+— 136 AU, its distance when this file was recorded on 2016-09-19 (MJD 57650.78,
+straight out of the header) — sweeping
 −0.3776 Hz/s. Our own loader re-measures the drift rate turboSETI reported for
 this file to four decimal places. This is the only confirmed
 interstellar-distance technosignature anyone has, and it is the standing
